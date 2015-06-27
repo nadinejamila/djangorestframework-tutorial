@@ -1,13 +1,13 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.response import response
+from rest_framework.response import Response
 
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
 
 
 @api_view(['GET', 'POST'])
-def snippet_list(request):
+def snippet_list(request, format=None):
 	""" List all snippets, or create a new one."""
 	if request.method == 'GET':
 		snippets = Snippet.objects.all()
@@ -23,7 +23,7 @@ def snippet_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def snippet_detail(request, pk):
+def snippet_detail(request, pk, format=None):
 	""" Retrieve, update, or delete a snippet instance. """
 	try:
 		snippet = Snippet.objects.get(pk=pk)
@@ -43,7 +43,8 @@ def snippet_detail(request, pk):
 
 	elif request.method == 'DELETE':
 		snippet.delete()
-		return Response(status=status.HTTP_204_NO_COUNTENT)	
+		return Response(status=status.HTTP_204_NO_COUNTENT)
+
 
 	elif request.method == 'DELETE':
 		snippet.delete()
