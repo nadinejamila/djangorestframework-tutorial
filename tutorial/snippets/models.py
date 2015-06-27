@@ -24,7 +24,7 @@ class Snippet(models.Model):
 		ordering = ('created',)
 
 	def save(self, *args, **kwargs):
-		""" User the  `pygments` library to create a highlighted HTML
+		""" Use the  `pygments` library to create a highlighted HTML
 			representation of the code snippet. """
 		lexer = get_lexer_by_name(self.language)
 		linenos = self.linenos and 'table' or False
